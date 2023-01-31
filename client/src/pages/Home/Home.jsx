@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components"
+import TopBar from "../../components/TopBar/TopBar";
+import Hero from "../../components/Hero/Hero";
+import bg3 from '../../assets/bg3.jpg';
 
-const Component = styled.div`
-background-color: seagreen;
+const Container = styled.div`
+background: ${(props) => `url(${props.imgUrl})`}; 
+height: 100vh;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
 `
 
 const Home = () => {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:8000/message")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
+  
   return (
-    <Component>
-      <h1>{message}</h1>
-    </Component>
+    <Container imgUrl={bg3}>
+      <TopBar />
+      <Hero />
+    </Container>
   );
 }
 

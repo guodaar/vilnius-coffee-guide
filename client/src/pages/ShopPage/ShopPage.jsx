@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import TopBar from "../../components/TopBar/TopBar";
 
-const Component = styled.element`
+const Component = styled.div`
 
 `
 
 const ShopPage = () => {
-  return <Component></Component>
+  return <Component>
+    <TopBar/>
+  </Component>
 }
 
 export default ShopPage

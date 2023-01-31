@@ -11,14 +11,17 @@ export const SHOP_PATH = `${COFFEESHOPS_PATH}:coffeeshop`;
 export const routes = [
   {
     path: HOME_PATH,
+    name: "Home",
     Component: Home,
   },
   {
     path: CONTACT_PATH,
+    name: "Contact",
     Component: Contact,
   },
   {
     path: COFFEESHOPS_PATH,
+    name: "Coffee shops",
     Component: Coffeeshops,
   },
   {
