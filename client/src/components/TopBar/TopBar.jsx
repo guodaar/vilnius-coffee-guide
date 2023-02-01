@@ -1,8 +1,21 @@
 import styled from "styled-components"
 import { routes } from "../../routes/const"
 import { useNavigate } from "react-router-dom";
-import {border, latte} from '../../const/colors';
+import {border, latte, mainFont} from '../../const/styles';
 
+const TopBar = () => {
+  const navigate = useNavigate();
+
+  return (
+    <Container>
+      {routes.map((route) => (
+        <NavItem key={route.name}onClick={() => navigate(route.path)}>{route.name}</NavItem>
+      ))}
+    </Container>
+  )
+}
+
+export default TopBar
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +29,7 @@ const Container = styled.div`
 const NavItem = styled.a`
   cursor: pointer;
   padding: 10px;
-  font-family: 'Space Mono';
+  font-family: ${mainFont};
   font-size: 1.3rem;
   border-left: ${border};
 
@@ -39,19 +52,4 @@ const NavItem = styled.a`
   &:hover::after {
     color: ${latte}
   }
-
 `
-
-const TopBar = () => {
-  const navigate = useNavigate();
-
-  return (
-    <Container>
-      {routes.map((route) => (
-        <NavItem onClick={() => navigate(route.path)}>{route.name}</NavItem>
-      ))}
-    </Container>
-  )
-}
-
-export default TopBar

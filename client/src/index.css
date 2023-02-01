@@ -16,6 +16,10 @@ p, h1, h2, h3, a, button {
   margin: 0;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

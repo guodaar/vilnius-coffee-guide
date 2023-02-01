@@ -1,54 +1,6 @@
 import styled from "styled-components"
 import TopBar from "../../components/TopBar/TopBar";
-import { border, latte } from "../../const/colors";
-
-const HeroWrapper = styled.div`
-  margin: 100px 5vw;
-  display: flex;
-  gap: 5vw;
-
-  div {
-    flex: 1.5;
-
-    &:last-of-type {
-      flex: 1;
-    }
-  }
-`
-
-const Title = styled.h1`
-  text-transform: uppercase;
-  text-align: left;
-  font-size: 6rem;
-  font-weight: 100;
-  line-height: 85%;
-  font-family: 'Unbounded';
-  color: ${latte};
-
-  &:first-of-type::before {
-  content: '+';
-  padding-right: 5px;
-  }
-
-  &:first-of-type::after {
-  content: '+';
-  padding-left: 5px;
-  }
-
-  &:last-of-type {
-    font-style: italic;
-  }
-`;
-
-const Description = styled.p`
-  color: ${latte};
-  font-family: 'Space Mono';
-  font-size: 0.9rem;
-  text-align: right;
-  padding: 10px 10px 0 0;
-  border-top: ${border};
-  border-right: ${border};
-`
+import { border, latte, mainDisplayFont, mainFont } from "../../const/styles";
 
 const Home = () => {
   
@@ -72,3 +24,51 @@ const Home = () => {
 }
 
 export default Home
+
+const HeroWrapper = styled.div`
+  margin: 100px 5vw;
+  display: flex;
+  gap: 5vw;
+
+  div {
+    flex: 1.5;
+
+    &:last-of-type {
+      flex: 1;
+    }
+  }
+`
+
+const Title = styled.h1`
+  text-transform: uppercase;
+  text-align: left;
+  font-size: 6rem;
+  font-weight: 100;
+  line-height: 85%;
+  font-family: ${mainDisplayFont};
+  color: ${latte};
+
+  &:first-of-type::before {
+  content: '+';
+  padding-right: 5px;
+  }
+
+  &:first-of-type::after {
+  content: '+';
+  padding-left: 5px;
+  }
+
+  &:last-of-type {
+    font-style: italic;
+  }
+`;
+
+const Description = styled.p`
+  color: ${latte};
+  font-family: ${mainFont};
+  font-size: 0.9rem;
+  text-align: right;
+  padding: 10px 10px 0 0;
+  border-top: ${border};
+  border-right: ${border};
+`
