@@ -1,1 +1,3 @@
-export const latte = "rgb(166,126,99)";
+export const latte = "#CBB4A4";
+
+export const border = `2px solid ${latte}`;

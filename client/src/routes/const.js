@@ -15,15 +15,18 @@ export const routes = [
     Component: Home,
   },
   {
-    path: CONTACT_PATH,
-    name: "Contact",
-    Component: Contact,
-  },
-  {
     path: COFFEESHOPS_PATH,
     name: "Coffee shops",
     Component: Coffeeshops,
   },
+  {
+    path: CONTACT_PATH,
+    name: "Contact",
+    Component: Contact,
+  },
+];
+
+export const secondaryRoutes = [
   {
     path: SHOP_PATH,
     Component: ShopPage,

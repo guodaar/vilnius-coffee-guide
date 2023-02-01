@@ -1,23 +1,43 @@
 import styled from "styled-components"
 import { routes } from "../../routes/const"
 import { useNavigate } from "react-router-dom";
-import {latte} from '../../const/colors'
+import {border, latte} from '../../const/colors';
+
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: flex-end;
+  align-items: center;
   color: ${latte};
+  border-bottom: ${border};
+  margin-left: 5vw;
 `
 
 const NavItem = styled.a`
   cursor: pointer;
   padding: 10px;
+  font-family: 'Space Mono';
+  font-size: 1.3rem;
+  border-left: ${border};
 
-  &:hover::before{
+  &::before {
     content: '+';
     padding-right: 5px;
+    color: transparent;
+  }
+
+  &::after{
+    content: '+';
+    padding-right: 5px;
+    color: transparent;
+  }
+
+  &:hover::before {
+    color: ${latte}
+  }
+
+  &:hover::after {
+    color: ${latte}
   }
 
 `
