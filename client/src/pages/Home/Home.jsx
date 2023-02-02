@@ -1,12 +1,10 @@
 import styled from "styled-components"
-import TopBar from "../../components/TopBar/TopBar";
 import { border, latte, mainDisplayFont, mainFont } from "../../const/styles";
 
 const Home = () => {
   
   return (
-    <div>
-      <TopBar />
+    <>
       <HeroWrapper>
         <div>
           <Title>Vilnius</Title>
@@ -19,14 +17,13 @@ const Home = () => {
           </Description>
         </div>
     </HeroWrapper>
-    </div>
+    </>
   );
 }
 
 export default Home
 
 const HeroWrapper = styled.div`
-  margin: 100px 5vw;
   display: flex;
   gap: 5vw;
 
