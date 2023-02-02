@@ -1,13 +1,23 @@
 import styled from "styled-components";
 import { border, latte, mainFont } from "../../const/styles";
+import { SHOP_PATH } from "../../routes/const";
 import Button from "../Button/Button";
+import {useParams, useNavigate, generatePath} from 'react-router-dom';
 
-const Card = ({shopName, image}) => {
+const Card = ({shopName, image, id}) => {
+  const navigate = useNavigate();
+  const {shop} = useParams();
+
+  const navigateToShop = (shop, shopId) => {
+    const path = generatePath(SHOP_PATH, {shop, shopId});
+    navigate(path);
+  }
+
   return <Container >
     <Title>{shopName}</Title>
     <CardContent image={image}>
       <HoverDiv>
-        <Button>See more</Button>
+        <Button onClick={() => navigateToShop(shop, id)}>See more</Button>
       </HoverDiv>
     </CardContent>
   </Container>
@@ -27,10 +37,12 @@ const Title = styled.h2`
   font-size: 0.9rem;
   font-family: ${mainFont};
   padding: 5px;
+  flex: 1;
 `
 
 const CardContent = styled.div`
-  height: 300px;
+  min-height: 300px;
+  flex: 1;
   display: flex;
   justify-content: center;
   position: relative;

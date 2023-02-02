@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { border, latte, mainFont } from "../../const/styles"
+import { border, darkLatte, latte, mainFont } from "../../const/styles"
 
 const Button = ({children, onClick}) => {
   return (
@@ -10,18 +10,29 @@ const Button = ({children, onClick}) => {
 export default Button
 
 const CustomButton = styled.button`
-background-color: ${latte};
-color: black;
+background-color: transparent;
+color: ${latte};
 padding: 10px 20px;
 border: ${border};
 position: relative;
 font-family: ${mainFont};
+text-transform: uppercase;
 transition: 0.2s ease-in-out;
 
-&:hover {
-  background-color: transparent;
-  color: ${latte};
-  cursor: pointer;
+&::before, &::after {
+  content: '+';
+  font-size: 1rem;
+  padding: 0 3px;
 }
+
+&:hover {
+  cursor: pointer;
+  background-color: ${latte};
+  color: black;
+}
+
+&:hover::before, &:hover::after {
+    color: black;
+  }
 `
 
