@@ -1,12 +1,15 @@
+import { useContext } from "react";
 import styled from "styled-components"
 import Card from "../../components/Card/Card";
-import { coffeeshops } from "../../data/mock";
+import { ShopsContext } from "../../contexts/ShopsContext";
 
 const Coffeeshops = () => {
+  const {shops} = useContext(ShopsContext);
+  console.log(shops)
 
   return <>
     <CardsWrapper>
-      {coffeeshops.map((shop) => (
+      {shops.map((shop) => (
       <Card 
       key={shop.id} 
       shopName={shop.name} 

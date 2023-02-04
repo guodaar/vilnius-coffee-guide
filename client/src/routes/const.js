@@ -14,18 +14,22 @@ export const mainLayoutRoutes = {
   routes: [
     {
       path: HOME_PATH,
+      breadcrumb: "Home",
       Component: Home,
     },
     {
       path: COFFEESHOPS_PATH,
+      breadcrumb: "Coffee shops",
       Component: Coffeeshops,
     },
     {
       path: CONTACT_PATH,
+      breadcrumb: "Contact",
       Component: Contact,
     },
     {
       path: SHOP_PATH,
+      breadcrumb: "Shop",
       Component: ShopPage,
     },
   ],
