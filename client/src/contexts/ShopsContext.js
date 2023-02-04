@@ -10,10 +10,9 @@ const ShopsProvider = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://testapi.io/api/lukasnvc/resource/NewEshop")
+      .get("http://localhost:8000/shops")
       .then((response) => {
-        const transformedData = transformData(response.data.data);
-        setProducts(transformedData);
+        setShops(response.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -22,10 +21,10 @@ const ShopsProvider = ({ children }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, isLoading }}>
+    <ShopsContext.Provider value={{ shops, isLoading }}>
       {children}
-    </ProductContext.Provider>
+    </ShopsContext.Provider>
   );
 };
 
-export { ProductContext, ProductProvider };
+export { ShopsContext, ShopsProvider };
