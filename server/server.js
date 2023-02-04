@@ -12,8 +12,34 @@ const client = new MongoClient(uri);
 app.use(cors());
 app.use(express.json());
 
-app.get("/message", (req, res) => {
-  res.json({ message: "Hello from server!" });
+app.get("/shops", async (req, res) => {
+  try {
+    const con = await client.connect();
+    const data = await con
+      .db("coffeeshops")
+      .collection("shop-info")
+      .find()
+      .toArray();
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
+app.post("/shops", async (req, res) => {
+  try {
+    const shop = req.body;
+    const con = await client.connect();
+    const data = await con
+      .db("coffeeshops")
+      .collection("shop-info")
+      .insertOne(shop);
+    res.send(data);
+    await con.close();
+  } catch (error) {
+    res.status(500).send({ error });
+  }
 });
 
 app.listen(port, () => {
