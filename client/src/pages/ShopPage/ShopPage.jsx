@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {Link, useNavigate, useParams} from 'react-router-dom';
-import { latte, mainDisplayFont } from "../../const/styles";
+import {useParams} from 'react-router-dom';
+import { latte, mainDisplayFont, mainFont, milk, mocha } from "../../const/styles";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from "swiper";
 import "swiper/css/navigation";
@@ -8,18 +8,21 @@ import "swiper/css/pagination";
 import 'swiper/css';
 import { useContext } from "react";
 import { ShopsContext } from "../../contexts/ShopsContext";
-import { BsFacebook, BsInstagram, BsFillHouseDoorFill } from 'react-icons/bs'
-import Socials from "../../components/Socials/Socials";
+import Links from "../../components/Socials/Socials";
+import ReactStars from "react-rating-stars-component";
 
 const ShopPage = () => {
-  const navigate = useNavigate();
   const {shops} = useContext(ShopsContext);
   const {shopId} = useParams();
   const shop = shops.find((shop) => shop.id === Number(shopId))
   const [...photos] = shop.photos;
-  const [...links] = shop.websites;
+  const {...links} = shop.websites;
   console.log(links);
 
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+ 
   return <Container>
     <Carousel
       loop={true}
@@ -38,13 +41,23 @@ const ShopPage = () => {
       ...
     </Carousel>
     <InfoContainer>
+      <ReactStars
+        count={5}
+        onChange={ratingChanged}
+        size={28}
+        edit={false}
+        value={4}
+        activeColor={milk}
+        color={mocha}
+        isHalf={true}
+      />
       <ShopTitle>{shop.name}</ShopTitle>
-      {links.map((website) => (
-        <Link to={website.link}>
-          <BsFacebook/>
-        </Link>
-      ))}
-      
+      <Socials>
+        <Links website="facebook" link={links}/>
+        <Links website="instagram" link={links}/>
+        <Links website="homepage" link={links}/>
+      </Socials>
+      <p>Address: {shop.address}</p>
     </InfoContainer>
   </Container>
 }
@@ -58,9 +71,10 @@ const Container = styled.div`
 `
 
 const Carousel = styled(Swiper)`
-  height: 400px;
+  height: 450px;
   display: inline-flex;
   flex: 1;
+  color: ${milk};
 
   img {
     height: 100%;
@@ -74,10 +88,18 @@ const InfoContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 20px;
   color: ${latte};
+  font-family: ${mainFont};
 `
 
 const ShopTitle = styled.h2`
   font-family: ${mainDisplayFont};
+`
+
+const Socials = styled.div`
+  display: flex;
+  gap: 20px;
+
 `
 
