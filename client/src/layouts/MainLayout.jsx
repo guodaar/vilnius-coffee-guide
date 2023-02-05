@@ -13,5 +13,5 @@ const MainLayout = ({children}) => {
 export default MainLayout
 
 const ContentWrapper = styled.div`
-  margin: 80px 5vw;
+  margin: 50px 5vw;
 `

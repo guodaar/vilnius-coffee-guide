@@ -25,6 +25,7 @@ export default Home
 
 const HeroWrapper = styled.div`
   display: flex;
+  padding-top: 50px;
   gap: 5vw;
 
   div {
