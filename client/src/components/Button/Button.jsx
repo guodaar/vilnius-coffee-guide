@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { border, darkLatte, latte, mainFont } from "../../const/styles"
+import { border, latte, mainFont } from "../../const/styles"
 
 const Button = ({children, onClick}) => {
   return (
