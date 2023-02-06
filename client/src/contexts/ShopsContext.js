@@ -6,6 +6,7 @@ const ShopsContext = createContext();
 const ShopsProvider = ({ children }) => {
   const [shops, setShops] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -13,15 +14,18 @@ const ShopsProvider = ({ children }) => {
       .get("http://localhost:8000/shops")
       .then((response) => {
         setShops(response.data);
-        setIsLoading(false);
       })
       .catch((error) => {
+        setError("Could not load items");
         console.error("Products:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
   return (
-    <ShopsContext.Provider value={{ shops, isLoading }}>
+    <ShopsContext.Provider value={{ shops, isLoading, error }}>
       {children}
     </ShopsContext.Provider>
   );

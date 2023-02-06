@@ -1,11 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components"
 import Card from "../../components/Card/Card";
 import { ShopsContext } from "../../contexts/ShopsContext";
 
 const Coffeeshops = () => {
-  const {shops} = useContext(ShopsContext);
+  const {shops, isLoading, error} = useContext(ShopsContext) || [];
   console.log(shops)
+
+  if (isLoading) {
+    return console.log("Kraunasi...")
+  } 
+
+  if (error) {
+    return error;
+  }
 
   return <>
     <CardsWrapper>
