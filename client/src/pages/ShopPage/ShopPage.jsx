@@ -14,14 +14,17 @@ import ReactStars from "react-rating-stars-component";
 const ShopPage = () => {
   const {shops} = useContext(ShopsContext);
   const {shopId} = useParams();
-  const shop = shops.find((shop) => shop.id === Number(shopId))
-  const [...photos] = shop.photos;
-  const {...links} = shop.websites;
-  console.log(links);
+  const shop = shops.find((shop) => shop.id === Number(shopId));
+  const photos = shop ? shop.photos: [];
+  const links = shop? shop.websites : {};
 
   const ratingChanged = (newRating) => {
     console.log(newRating);
   };
+
+  if (!shop) {
+    return null
+  } 
  
   return <Container>
     <Carousel
