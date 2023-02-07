@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { border, latte, mainFont } from "../../const/styles"
 
-const Button = ({children, onClick}) => {
+const Button = ({children, onClick, type}) => {
   return (
-    <CustomButton onClick={onClick}>{children}</CustomButton>
+    <CustomButton type={type} onClick={onClick}>{children}</CustomButton>
   )
 }
 

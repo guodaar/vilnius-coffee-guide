@@ -1,22 +1,29 @@
 import styled from "styled-components";
 import {useParams} from 'react-router-dom';
-import { latte, mainDisplayFont, mainFont, milk, mocha } from "../../const/styles";
+import { useContext, useRef } from "react";
+import { ShopsContext } from "../../contexts/ShopsContext";
+import Links from "../../components/Socials/Socials";
+import { darkLatte, latte, mainDisplayFont, mainFont, milk, mocha } from "../../const/styles";
+import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from "swiper";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import 'swiper/css';
-import { useContext } from "react";
-import { ShopsContext } from "../../contexts/ShopsContext";
-import Links from "../../components/Socials/Socials";
-import ReactStars from "react-rating-stars-component";
+import Reviews from "./Reviews";
 
 const ShopPage = () => {
+  const ref = useRef(null);
+
   const {shops} = useContext(ShopsContext);
   const {shopId} = useParams();
   const shop = shops.find((shop) => shop.id === Number(shopId));
   const photos = shop ? shop.photos: [];
   const links = shop? shop.websites : {};
+
+  const handleClick = () => {
+    ref.current?.scrollIntoView({behavior: 'smooth'});
+  };
 
   const ratingChanged = (newRating) => {
     console.log(newRating);
@@ -26,7 +33,9 @@ const ShopPage = () => {
     return null
   } 
  
-  return <Container>
+  return (
+  <MainContainer>
+  <ShopContainer>
     <Carousel
       loop={true}
       pagination={{
@@ -44,7 +53,8 @@ const ShopPage = () => {
       ...
     </Carousel>
     <InfoContainer>
-      <ReactStars
+      <RatingContainer>
+        <ReactStars
         count={5}
         onChange={ratingChanged}
         size={28}
@@ -54,6 +64,9 @@ const ShopPage = () => {
         color={mocha}
         isHalf={true}
       />
+        <ReviewsLink onClick={handleClick}>Reviews</ReviewsLink>
+      </RatingContainer>
+      
       <ShopTitle>{shop.name}</ShopTitle>
       <Socials>
         <Links website="facebook" link={links}/>
@@ -62,12 +75,22 @@ const ShopPage = () => {
       </Socials>
       <p>Address: {shop.address}</p>
     </InfoContainer>
-  </Container>
-}
+  </ShopContainer>
+  <div ref={ref}>
+    <Reviews/>
+  </div>
+  </MainContainer>
+)}
 
 export default ShopPage
 
-const Container = styled.div`
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+`
+
+const ShopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 5vw;
@@ -96,8 +119,29 @@ const InfoContainer = styled.div`
   font-family: ${mainFont};
 `
 
+const RatingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`
+
+const ReviewsLink = styled.a`
+text-decoration: underline;
+padding-top: 3px;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  &:active {
+    color: ${darkLatte}
+  }
+`
+
 const ShopTitle = styled.h2`
   font-family: ${mainDisplayFont};
+  letter-spacing: 1px;
 `
 
 const Socials = styled.div`
