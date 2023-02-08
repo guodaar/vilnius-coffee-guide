@@ -12,8 +12,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-p, h1, h2, h3, a, button {
+p, h1, h2, h3, a, button, input, textarea {
   margin: 0;
+  box-sizing: border-box;
 }
 
 html {

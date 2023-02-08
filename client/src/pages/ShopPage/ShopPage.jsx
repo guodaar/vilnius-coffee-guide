@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import 'swiper/css';
 import Reviews from "./Reviews";
+import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
 const ShopPage = () => {
   const ref = useRef(null);
@@ -57,12 +58,15 @@ const ShopPage = () => {
         <ReactStars
         count={5}
         onChange={ratingChanged}
-        size={28}
+        size={24}
         edit={false}
         value={4}
-        activeColor={milk}
-        color={mocha}
         isHalf={true}
+        activeColor={latte}
+        color={latte}
+        emptyIcon={<BsStar/>}
+        halfIcon={<BsStarHalf/>}
+        filledIcon={<BsStarFill/>}
       />
         <ReviewsLink onClick={handleClick}>Reviews</ReviewsLink>
       </RatingContainer>
@@ -127,7 +131,6 @@ const RatingContainer = styled.div`
 
 const ReviewsLink = styled.a`
 text-decoration: underline;
-padding-top: 3px;
 
   &:hover {
     cursor: pointer;
