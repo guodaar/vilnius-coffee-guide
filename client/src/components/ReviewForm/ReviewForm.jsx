@@ -1,14 +1,19 @@
 import styled from "styled-components";
-import { border, latte, mainDisplayFont, mainFont, milk, mocha } from "../../const/styles";
+import { border, latte, mainDisplayFont, mainFont } from "../../const/styles";
 import {Formik, Form} from 'formik';
 import ReactStars from "react-rating-stars-component";
 import Button from '../../components/Button/Button';
 import FormikInput from "../../components/Form/FormikInput";
 import {BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
+import { createReview } from "../../api/reviews";
 
-const ReviewForm = () => {
+const ReviewForm = ({shopId}) => {
   const handleSubmit = (values) => {
-    console.log(values);
+    createReview(values).then(() => {
+      console.log(values)
+    }).catch((error) => {
+      console.error('post failed', error)
+    })
   }
 
   return (
@@ -20,6 +25,7 @@ const ReviewForm = () => {
       email: '',
       name: '',
       comment: '',
+      shop_id: shopId
     }}
     onSubmit={handleSubmit}>
       {({setFieldValue}) => (

@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import { useContext, useRef } from "react";
 import { ShopsContext } from "../../contexts/ShopsContext";
 import Links from "../../components/Socials/Socials";
-import { darkLatte, latte, mainDisplayFont, mainFont, milk, mocha } from "../../const/styles";
+import { darkLatte, latte, mainDisplayFont, mainFont, milk } from "../../const/styles";
 import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from "swiper";
@@ -81,7 +81,7 @@ const ShopPage = () => {
     </InfoContainer>
   </ShopContainer>
   <div ref={ref}>
-    <Reviews/>
+    <Reviews shopId={shopId}/>
   </div>
   </MainContainer>
 )}
