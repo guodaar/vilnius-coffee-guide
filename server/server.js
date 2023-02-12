@@ -43,6 +43,36 @@ app.post("/shops", async (req, res) => {
   }
 });
 
+app.post("/reviews", async (req, res) => {
+  try {
+    const review = req.body;
+    const con = await client.connect();
+    const data = await con
+      .db("coffeeshops")
+      .collection("reviews")
+      .insertOne(review);
+    res.send(data);
+    await con.close();
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
+app.get("/reviews", async (req, res) => {
+  try {
+    const con = await client.connect();
+    const data = await con
+      .db("coffeeshops")
+      .collection("reviews")
+      .find()
+      .toArray();
+    await con.close();
+    res.send(data);
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on ${port} port`);
 });
