@@ -1,18 +1,17 @@
-import { useContext } from "react";
 import styled from "styled-components"
 import Card from "../../components/Card/Card";
-import { ShopsContext } from "../../contexts/ShopsContext";
+import { useShopData } from "../../hooks/coffeeshops";
 
 const Coffeeshops = () => {
-  const {shops, isLoading, error} = useContext(ShopsContext) || [];
-  console.log(shops)
+  const {data, isLoading, error} = useShopData();
+  const shops = data || [];
 
   if (isLoading) {
     return console.log("Kraunasi...")
   } 
 
   if (error) {
-    return error;
+    return 'Could not load';
   }
 
   return <>

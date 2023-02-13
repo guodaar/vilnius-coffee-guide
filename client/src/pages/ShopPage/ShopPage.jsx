@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {useParams} from 'react-router-dom';
-import { useContext, useRef } from "react";
-import { ShopsContext } from "../../contexts/ShopsContext";
+import { useRef } from "react";
 import Links from "../../components/Socials/Socials";
 import { darkLatte, latte, mainDisplayFont, mainFont, milk } from "../../const/styles";
 import ReactStars from "react-rating-stars-component";
@@ -12,13 +11,23 @@ import "swiper/css/pagination";
 import 'swiper/css';
 import Reviews from "./Reviews";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
+import { useShopData } from "../../hooks/coffeeshops";
+import { useReviewData } from "../../hooks/reviews";
+import { getAverage } from "../../utils/getAverage";
 
 const ShopPage = () => {
   const ref = useRef(null);
 
-  const {shops} = useContext(ShopsContext);
+  const {data: shopData} = useShopData();
+  const shops = shopData || [];
+
+  const {data: reviewsData} = useReviewData();
+  const reviews = reviewsData || [];
+
+  
   const {shopId} = useParams();
   const shop = shops.find((shop) => shop.id === Number(shopId));
+
   const photos = shop ? shop.photos: [];
   const links = shop? shop.websites : {};
 
@@ -33,7 +42,11 @@ const ShopPage = () => {
   if (!shop) {
     return null
   } 
- 
+
+  if (!reviews) {
+    return null
+  } 
+
   return (
   <MainContainer>
   <ShopContainer>
@@ -60,7 +73,7 @@ const ShopPage = () => {
         onChange={ratingChanged}
         size={24}
         edit={false}
-        value={4}
+        value={0}
         isHalf={true}
         activeColor={latte}
         color={latte}
