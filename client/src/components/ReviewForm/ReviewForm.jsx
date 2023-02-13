@@ -6,6 +6,13 @@ import Button from '../../components/Button/Button';
 import FormikInput from "../../components/Form/FormikInput";
 import {BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 import { createReview } from "../../api/reviews";
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+  rating: Yup.number().required('Required'),
+  email: Yup.string().required('Email required'),
+  name: Yup.string().required('Name required')
+})
 
 const ReviewForm = ({shopId}) => {
   const handleSubmit = (values) => {
@@ -25,8 +32,9 @@ const ReviewForm = ({shopId}) => {
       email: '',
       name: '',
       comment: '',
-      shop_id: shopId
+      shop_id: +shopId
     }}
+    validationSchema={validationSchema}
     onSubmit={handleSubmit}>
       {({setFieldValue}) => (
         <StyledForm>
