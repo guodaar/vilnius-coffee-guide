@@ -2,12 +2,21 @@ import styled from "styled-components";
 import { latte, mainDisplayFont } from "../../const/styles";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import Button from "../../components/Button/Button";
-import { useContext } from "react";
-import { ReviewsContext } from '../../contexts/ReviewsContext';
+import { useReviewData } from "../../hooks/reviews";
+import ReviewCard from "../../components/ReviewCard/ReviewCard";
 
 const Reviews = ({shopId}) => {
-  const {reviews} = useContext(ReviewsContext);
+  const {data, isLoading, error} = useReviewData();
+  const reviews = data || [];
   console.log(reviews);
+
+  if (isLoading) {
+    return console.log("Kraunasi...")
+  } 
+
+  if (error) {
+    return 'Could not load';
+  }
   
   return (
     <Container>
@@ -17,7 +26,9 @@ const Reviews = ({shopId}) => {
       </TopWrapper>
     <ReviewForm shopId={shopId}/>
     <ReviewsContainer>
-
+      {reviews.map((review) => (
+        <ReviewCard name={review.name} stars={review.rating} comment={review.comment}/>
+      ))}
     </ReviewsContainer>
     </Container>
   )
@@ -45,5 +56,4 @@ const TopWrapper = styled.div`
 const ReviewsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
 `
