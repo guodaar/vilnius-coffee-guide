@@ -13,7 +13,6 @@ import Reviews from "./Reviews";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { useShopData } from "../../hooks/coffeeshops";
 import { useReviewData } from "../../hooks/reviews";
-import { getAverage } from "../../utils/getAverage";
 
 const ShopPage = () => {
   const ref = useRef(null);
@@ -24,7 +23,6 @@ const ShopPage = () => {
   const {data: reviewsData} = useReviewData();
   const reviews = reviewsData || [];
 
-  
   const {shopId} = useParams();
   const shop = shops.find((shop) => shop.id === Number(shopId));
 

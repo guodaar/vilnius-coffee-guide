@@ -1,14 +1,20 @@
 import styled from "styled-components";
-import { latte, mainDisplayFont } from "../../const/styles";
+import { border, latte, mainDisplayFont } from "../../const/styles";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
 import Button from "../../components/Button/Button";
 import { useReviewData } from "../../hooks/reviews";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
+import { useState } from "react";
 
 const Reviews = ({shopId}) => {
   const {data, isLoading, error} = useReviewData();
   const reviews = data || [];
-  console.log(reviews);
+  const shopReviews = reviews.filter((review) => review.shop_id === Number(shopId)) || [];
+
+  const [toggle, setToggle] = useState(false)
+    const handleToggle = () => {
+        setToggle(!toggle)
+    }
 
   if (isLoading) {
     return console.log("Kraunasi...")
@@ -22,11 +28,11 @@ const Reviews = ({shopId}) => {
     <Container>
       <TopWrapper>
         <h2>Customer reviews</h2>
-        <Button>Leave a review</Button>
+        <Button onClick={handleToggle}>Leave a review</Button>
       </TopWrapper>
-    <ReviewForm shopId={shopId}/>
+    <ReviewForm toggle={toggle} shopId={shopId}/>
     <ReviewsContainer>
-      {reviews.map((review) => (
+      {shopReviews.map((review) => (
         <ReviewCard name={review.name} stars={review.rating} comment={review.comment}/>
       ))}
     </ReviewsContainer>
@@ -39,6 +45,8 @@ export default Reviews
 const Container = styled.div`
 color: ${latte};
 margin: 0 10vw;
+padding-top: 36px;
+border-top: ${border};
 
 h2 {
   font-family: ${mainDisplayFont};
@@ -56,4 +64,6 @@ const TopWrapper = styled.div`
 const ReviewsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
+  margin-top: 36px;
 `
