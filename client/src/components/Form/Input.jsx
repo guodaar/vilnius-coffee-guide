@@ -40,7 +40,7 @@ const StyledTextarea = styled.textarea`
   outline: none;
   background-color: ${mocha};
   width: 100%;
-  resize: none;
+  resize: vertical;
   font-family: 'Arial';
 
   &::placeholder {

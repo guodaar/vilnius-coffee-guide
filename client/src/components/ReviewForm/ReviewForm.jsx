@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { border, latte, mainDisplayFont, mainFont } from "../../const/styles";
+import { americano, border, latte, mainDisplayFont, mainFont, mocha } from "../../const/styles";
 import {Formik, Form} from 'formik';
 import ReactStars from "react-rating-stars-component";
 import Button from '../../components/Button/Button';
@@ -9,12 +9,12 @@ import { createReview } from "../../api/reviews";
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  rating: Yup.number().required('Required'),
+  rating: Yup.number().min(0.5, 'Leave a rating!').required(),
   email: Yup.string().required('Email required'),
   name: Yup.string().required('Name required')
 })
 
-const ReviewForm = ({shopId}) => {
+const ReviewForm = ({shopId, toggle}) => {
   const handleSubmit = (values) => {
     createReview(values).then(() => {
       console.log(values)
@@ -24,7 +24,7 @@ const ReviewForm = ({shopId}) => {
   }
 
   return (
-    <Container>
+    <Container toggle={toggle}>
     <Title>Leave a review</Title>
     <FormWrapper>
       <Formik initialValues={{
@@ -36,11 +36,13 @@ const ReviewForm = ({shopId}) => {
     }}
     validationSchema={validationSchema}
     onSubmit={handleSubmit}>
-      {({setFieldValue}) => (
+      {({setFieldValue, errors}) => (
         <StyledForm>
-          <StarsWrapper>
+          <RatingContainer>
+            <StarsWrapper>
             <p>Your rating:</p>
             <ReactStars
+            name={'rating'}
             count={5}
             onChange={(value) => setFieldValue('rating', value)}
             size={24}
@@ -53,6 +55,8 @@ const ReviewForm = ({shopId}) => {
             filledIcon={<BsStarFill/>}
             />
           </StarsWrapper>
+          <RatingError>{errors.rating}</RatingError>
+          </RatingContainer>
           <InputWrapper>
             <FormikInput type='text' name='name' label='Name:' placeholder='Enter your name'/>
             <FormikInput type='email' name='email' label='Email:' placeholder='Enter your email (not displayed)'/>
@@ -77,11 +81,11 @@ color: ${latte};
 font-family: ${mainFont};
 margin: 32px auto;
 padding: 32px 5vw;
-display: flex;
+display: ${({toggle}) => toggle ? 'flex' : 'none'};
 justify-content: center;
 flex-direction: column;
 gap: 20px;
-max-width: 50vw;
+background-color: ${americano};
 `
 
 const FormWrapper = styled.div`
@@ -101,7 +105,6 @@ const StyledForm = styled(Form)`
   gap: 24px;
   flex-direction: column;
   width: 100%;
-
 `
 
 const InputWrapper = styled.div`
@@ -109,6 +112,18 @@ const InputWrapper = styled.div`
   justify-content: space-between;
   gap: 3vw;
   width: 100%;
+`
+
+const RatingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const RatingError = styled.p`
+  color: ${mocha};
+  font-size: 0.9rem;
 `
 
 const StarsWrapper = styled.div`

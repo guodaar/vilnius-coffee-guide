@@ -1,5 +1,6 @@
 import {Field, ErrorMessage} from 'formik';
 import styled from 'styled-components';
+import { mocha } from '../../const/styles';
 import Input from './Input';
 
 const FormikInput = ({ label, variant, name, ...restProps}) => {
@@ -7,7 +8,7 @@ const FormikInput = ({ label, variant, name, ...restProps}) => {
     <Container>
       <label>{label}</label>
       <Field variant={variant} name={name} as={Input} {...restProps}/>
-      <ErrorMessage name={name} component='div'/>
+      <StyledError name={name} component='div'/>
     </Container>
   )
 }
@@ -19,4 +20,9 @@ const Container = styled.div`
   flex-direction: column;
   gap: 5px;
   width: 100%;
+`
+
+const StyledError = styled(ErrorMessage)`
+  color: ${mocha};
+  font-size: 0.9rem;
 `
