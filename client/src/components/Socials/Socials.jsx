@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { darkLatte, latte } from "../../const/styles"
 import { BsFacebook, BsInstagram, BsFillHouseDoorFill } from 'react-icons/bs'
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 
 
