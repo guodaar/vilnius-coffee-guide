@@ -5,6 +5,7 @@ import Button from "../../components/Button/Button";
 import { useReviewData } from "../../hooks/reviews";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import { useState } from "react";
+import { convertDate } from "../../utils/getDate";
 
 const Reviews = ({shopId}) => {
   const {data, isLoading, error} = useReviewData();
@@ -33,7 +34,7 @@ const Reviews = ({shopId}) => {
     <ReviewForm toggle={toggle} shopId={shopId}/>
     <ReviewsContainer>
       {shopReviews.map((review) => (
-        <ReviewCard name={review.name} stars={review.rating} comment={review.comment}/>
+        <ReviewCard key={review.timestamp} date={convertDate(review.timestamp)} name={review.name} stars={review.rating} comment={review.comment}/>
       ))}
     </ReviewsContainer>
     </Container>

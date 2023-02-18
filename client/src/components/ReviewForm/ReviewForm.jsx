@@ -7,6 +7,7 @@ import FormikInput from "../../components/Form/FormikInput";
 import {BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 import { createReview } from "../../api/reviews";
 import * as Yup from 'yup';
+import { generateTimestamp } from "../../utils/getDate";
 
 const validationSchema = Yup.object().shape({
   rating: Yup.number().min(0.5, 'Leave a rating!').required(),
@@ -18,10 +19,13 @@ const ReviewForm = ({shopId, toggle}) => {
   const handleSubmit = (values) => {
     createReview(values).then(() => {
       console.log(values)
+      
     }).catch((error) => {
       console.error('post failed', error)
     })
   }
+
+  const date = generateTimestamp();
 
   return (
     <Container toggle={toggle}>
@@ -32,6 +36,7 @@ const ReviewForm = ({shopId, toggle}) => {
       email: '',
       name: '',
       comment: '',
+      timestamp: date,
       shop_id: +shopId
     }}
     validationSchema={validationSchema}

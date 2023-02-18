@@ -13,6 +13,7 @@ import Reviews from "./Reviews";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { useShopData } from "../../hooks/coffeeshops";
 import { useReviewData } from "../../hooks/reviews";
+import { getAverageNumber, getRoundNumber } from "../../utils/getNumber";
 
 const ShopPage = () => {
   const ref = useRef(null);
@@ -25,6 +26,8 @@ const ShopPage = () => {
 
   const {shopId} = useParams();
   const shop = shops.find((shop) => shop.id === Number(shopId));
+  const shopReviews = reviews.filter((review) => review.shop_id === Number(shopId))
+  console.log(shopReviews);
 
   const photos = shop ? shop.photos: [];
   const links = shop? shop.websites : {};
@@ -44,6 +47,9 @@ const ShopPage = () => {
   if (!reviews) {
     return null
   } 
+
+  const ratings = shopReviews.map((item) => item.rating);
+  const averageRating = getAverageNumber(ratings);
 
   return (
   <MainContainer>
@@ -71,7 +77,7 @@ const ShopPage = () => {
         onChange={ratingChanged}
         size={24}
         edit={false}
-        value={0}
+        value={getRoundNumber(averageRating)}
         isHalf={true}
         activeColor={latte}
         color={latte}
@@ -84,9 +90,12 @@ const ShopPage = () => {
       
       <ShopTitle>{shop.name}</ShopTitle>
       <Socials>
-        <Links website="facebook" link={links}/>
-        <Links website="instagram" link={links}/>
-        <Links website="homepage" link={links}/>
+        {links.facebook ? (<Links website="facebook" link={links}/>) :
+          null}
+        {links.instagram ? (<Links website="instagram" link={links}/>) :
+        null}
+        {links.homepage ? (<Links website="homepage" link={links}/>) :
+        null}
       </Socials>
       <p>Address: {shop.address}</p>
     </InfoContainer>
