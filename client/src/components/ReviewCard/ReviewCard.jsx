@@ -3,10 +3,9 @@ import ReactStars from "react-rating-stars-component";
 import { americano, border, latte } from "../../const/styles";
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
-const ReviewCard = ({name, stars, comment}) => {
+const ReviewCard = ({date, name, stars, comment}) => {
   return <Container>
     <LeftContainer>
-      <h4>{name}</h4>
       <ReactStars
         count={5}
         size={24}
@@ -18,7 +17,9 @@ const ReviewCard = ({name, stars, comment}) => {
         emptyIcon={<BsStar/>}
         halfIcon={<BsStarHalf/>}
         filledIcon={<BsStarFill/>}
-      />
+      /> 
+      <Title>{name}</Title>
+      <p>{date}</p> 
     </LeftContainer>
     <RightContainer>
       <p>{comment}</p>
@@ -40,11 +41,13 @@ border: ${border};
 
 const LeftContainer = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`
 
-  h4 {
-    text-transform: capitalize;
-    margin-bottom: 12px;
-  }
+const Title = styled.h4`
+  text-transform: capitalize;
 `
 
 const RightContainer = styled.div`
