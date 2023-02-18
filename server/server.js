@@ -58,7 +58,7 @@ app.post("/reviews", async (req, res) => {
   }
 });
 
-app.get("/reviews/", async (req, res) => {
+app.get("/reviews", async (req, res) => {
   try {
     const con = await client.connect();
     const data = await con
