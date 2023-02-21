@@ -9,17 +9,15 @@ import {
   mainFont,
   milk,
 } from "../../const/styles";
-import ReactStars from "react-rating-stars-component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css";
 import Reviews from "./Reviews";
-import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { useShopData } from "../../hooks/coffeeshops";
 import { useReviewData } from "../../hooks/reviews";
-import { getAverageNumber, getRoundNumber } from "../../utils/getNumber";
+import Stars from "../../components/ReactStars/ReactStars";
 
 const ShopPage = () => {
   const ref = useRef(null);
@@ -44,10 +42,6 @@ const ShopPage = () => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
-
   if (!shop) {
     return null;
   }
@@ -55,9 +49,6 @@ const ShopPage = () => {
   if (!reviews) {
     return null;
   }
-
-  const ratings = shopReviews.map((item) => item.rating);
-  const averageRating = getAverageNumber(ratings);
 
   return (
     <MainContainer>
@@ -85,22 +76,9 @@ const ShopPage = () => {
         </Carousel>
         <InfoContainer>
           <RatingContainer>
-            <ReactStars
-              count={5}
-              onChange={ratingChanged}
-              size={24}
-              edit={false}
-              value={getRoundNumber(averageRating)}
-              isHalf={true}
-              activeColor={latte}
-              color={latte}
-              emptyIcon={<BsStar />}
-              halfIcon={<BsStarHalf />}
-              filledIcon={<BsStarFill />}
-            />
+            <Stars rating={shop.rating_avg} />
             <ReviewsLink onClick={handleClick}>Reviews</ReviewsLink>
           </RatingContainer>
-
           <ShopTitle>{shop.name}</ShopTitle>
           <Socials>
             {links.facebook ? <Links website="facebook" link={links} /> : null}

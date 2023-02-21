@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Card from "../../components/Card/Card";
-import Sorting from "../../components/Sorting/Sorting";
+import Input from "../../components/Form/Input";
 import { latte } from "../../const/styles";
 import { useShopData } from "../../hooks/coffeeshops";
+import { sortMethods } from "../../utils/sortMethods";
 
 const Coffeeshops = () => {
   const [sortState, setSortState] = useState("none");
@@ -18,20 +19,22 @@ const Coffeeshops = () => {
     return "Could not load";
   }
 
-  const sortMethods = {
-    none: { method: (a, b) => null },
-    descending: { method: (a, b) => (a.name > b.name ? 1 : -1) },
-    ascending: { method: (a, b) => (a.name > b.name ? -1 : 1) },
-  };
-
   return (
     <>
       <FiltersWrapper>
-        <Sorting
+        <Input
+          variant="select"
+          defaultValue={"DEFAULT"}
           onChange={(e) => setSortState(e.target.value)}
-          ascOption="Name: Z - A"
-          descOption="Name: A - Z"
-        />
+        >
+          <option value="DEFAULT" disabled>
+            Sort by:
+          </option>
+          <option value="nameDesc">Name: A - Z</option>
+          <option value="nameAsc">Name: Z - A</option>
+          <option value="rateDesc">Rate: low - high</option>
+          <option value="rateAsc">Rate: high - low</option>
+        </Input>
       </FiltersWrapper>
       <CardsWrapper>
         {shops.sort(sortMethods[sortState].method).map((shop) => (
@@ -40,6 +43,7 @@ const Coffeeshops = () => {
             shopName={shop.name}
             image={shop.photos}
             id={shop.id}
+            rating={shop.rating_avg}
           />
         ))}
       </CardsWrapper>
