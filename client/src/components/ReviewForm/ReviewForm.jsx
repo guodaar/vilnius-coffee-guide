@@ -15,6 +15,7 @@ import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import { createReview } from "../../api/reviews";
 import * as Yup from "yup";
 import { generateTimestamp } from "../../utils/getDate";
+import { toast } from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
   rating: Yup.number().min(0.5, "Leave a rating!").required(),
@@ -23,14 +24,13 @@ const validationSchema = Yup.object().shape({
 });
 
 const ReviewForm = ({ shopId, toggle }) => {
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = (values) => {
     createReview(values)
       .then(() => {
-        console.log(values);
-        resetForm();
+        toast.success("Your review was subbmitted");
       })
       .catch((error) => {
-        console.error("post failed", error);
+        toast.error("Could not submit, try again");
       });
   };
 

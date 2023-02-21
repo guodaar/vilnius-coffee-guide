@@ -4,12 +4,25 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { latte } from "./const/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          className: "",
+          style: {
+            border: "1px solid #713200",
+            padding: "16px",
+            color: `${latte}`,
+          },
+        }}
+      />
     </BrowserRouter>
   </React.StrictMode>
 );
