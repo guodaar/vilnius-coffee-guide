@@ -6,7 +6,8 @@ import { useReviewData } from "../../hooks/reviews";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import { useState } from "react";
 import { convertDate } from "../../utils/getDate";
-import Sorting from "../../components/Sorting/Sorting";
+import Input from "../../components/Form/Input";
+import { sortMethods } from "../../utils/sortMethods";
 
 const Reviews = ({ shopId }) => {
   const [sortState, setSortState] = useState("none");
@@ -28,28 +29,30 @@ const Reviews = ({ shopId }) => {
     return "Could not load";
   }
 
-  const sortMethods = {
-    none: { method: (a, b) => null },
-    descending: { method: (a, b) => (a.rating > b.rating ? 1 : -1) },
-    ascending: { method: (a, b) => (a.rating > b.rating ? -1 : 1) },
-  };
-
   return (
     <Container>
       <TopWrapper>
         <h2>Customer reviews</h2>
-        <Button onClick={handleToggle}>Leave a review</Button>
-        <Sorting
-          onChange={(e) => setSortState(e.target.value)}
-          ascOption="Rating: low - high"
-          descOption="Rating: high - to low"
-        />
+        <div>
+          <Input
+            variant="select"
+            defaultValue={"DEFAULT"}
+            onChange={(e) => setSortState(e.target.value)}
+          >
+            <option value="DEFAULT" disabled>
+              Sort by:
+            </option>
+            <option value="starsDesc">Rate: low - high</option>
+            <option value="starsAsc">Rate: high - low</option>
+          </Input>
+          <Button onClick={handleToggle}>Leave a review</Button>
+        </div>
       </TopWrapper>
       <ReviewForm toggle={toggle} shopId={shopId} />
       <ReviewsContainer>
         {shopReviews.sort(sortMethods[sortState].method).map((review) => (
           <ReviewCard
-            key={review.timestamp}
+            key={review.name + review.timestamp}
             date={convertDate(review.timestamp)}
             name={review.name}
             stars={review.rating}
@@ -79,6 +82,12 @@ const TopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2vw;
+  }
 `;
 
 const ReviewsContainer = styled.div`

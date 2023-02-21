@@ -18,7 +18,26 @@ app.get("/shops", async (req, res) => {
     const data = await con
       .db("coffeeshops")
       .collection("shop-info")
-      .find()
+      .aggregate([
+        {
+          $lookup: {
+            from: "reviews",
+            localField: "id",
+            foreignField: "shop_id",
+            as: "rating",
+          },
+        },
+        {
+          $project: {
+            id: "$id",
+            name: "$name",
+            address: "$address",
+            photos: "$photos",
+            websites: "$websites",
+            rating_avg: { $avg: "$rating.rating" },
+          },
+        },
+      ])
       .toArray();
     await con.close();
     res.send(data);
