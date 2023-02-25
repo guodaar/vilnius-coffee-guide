@@ -28,6 +28,9 @@ const ReviewForm = ({ shopId, toggle }) => {
     createReview(values)
       .then(() => {
         toast.success("Your review was subbmitted");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((error) => {
         toast.error("Could not submit, try again");

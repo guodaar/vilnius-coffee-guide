@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useRef } from "react";
 import Links from "../../components/Socials/Socials";
 import {
@@ -8,6 +8,7 @@ import {
   mainDisplayFont,
   mainFont,
   milk,
+  mocha,
 } from "../../const/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
@@ -18,6 +19,7 @@ import Reviews from "./Reviews";
 import { useShopData } from "../../hooks/coffeeshops";
 import { useReviewData } from "../../hooks/reviews";
 import Stars from "../../components/ReactStars/ReactStars";
+import { CONTACT_PATH } from "../../routes/const";
 
 const ShopPage = () => {
   const ref = useRef(null);
@@ -88,6 +90,13 @@ const ShopPage = () => {
             {links.homepage ? <Links website="homepage" link={links} /> : null}
           </Socials>
           <p>Address: {shop.address}</p>
+          <ContactUs>
+            <p>
+              Have questions or corrections about coffee shops featured? Contact
+              us to help keep our content accurate and informative:{" "}
+              {<StyledLink to={CONTACT_PATH}>Contact Us</StyledLink>}.
+            </p>
+          </ContactUs>
         </InfoContainer>
       </ShopContainer>
       <div ref={ref}>
@@ -161,4 +170,15 @@ const ShopTitle = styled.h2`
 const Socials = styled.div`
   display: flex;
   gap: 20px;
+`;
+
+const ContactUs = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${mocha};
 `;

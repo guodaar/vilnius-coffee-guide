@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { latte } from "./const/styles";
+import { border, latte } from "./const/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,13 +13,14 @@ root.render(
     <BrowserRouter>
       <App />
       <Toaster
-        position="top-center"
+        position="bottom-center"
         toastOptions={{
           className: "",
           style: {
-            border: "1px solid #713200",
+            border: `${border}`,
             padding: "16px",
             color: `${latte}`,
+            backgroundColor: "#000000",
           },
         }}
       />

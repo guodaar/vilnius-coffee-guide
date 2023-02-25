@@ -53,8 +53,7 @@ app.post("/shops", async (req, res) => {
     const data = await con
       .db("coffeeshops")
       .collection("shop-info")
-      .insertMany(shop)
-      .toArray();
+      .insertOne(shop);
     res.send(data);
     await con.close();
   } catch (error) {
