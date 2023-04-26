@@ -17,6 +17,8 @@ This is a web app for discovering coffee shops in Vilnius. You can also leave st
 - <a href="https://www.npmjs.com/package/formik">Formik</a>
 - <a href="https://www.npmjs.com/package/react-router-dom">React Router Dom</a>
 - <a href="https://www.npmjs.com/package/react-hot-toast">React Hot Toast</a>
+- <a href="https://www.npmjs.com/package/react-rating-stars-component">React Rating Stars Component</a>
+- <a href="https://www.npmjs.com/package/react-icons">React Icons</a>
 
 ### Demo 👇
 <img src="https://imgur.com/eGMT8k6.jpg" width="70%"> 
