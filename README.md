@@ -19,8 +19,12 @@ This is a web app for discovering coffee shops in Vilnius. You can also leave st
 - <a href="https://www.npmjs.com/package/react-hot-toast">React Hot Toast</a>
 
 ### Demo 👇
-<img src="https://imgur.com/eGMT8k6.jpg" width="45%"> <img src="https://imgur.com/65bP1Fr.jpg" width="45%">
+<img src="https://imgur.com/eGMT8k6.jpg" width="70%"> 
 
-<img src="https://imgur.com/DYoOfz2.jpg" width="45%"> <img src="https://imgur.com/CYEUbIx.jpg" width="45%">
+<img src="https://imgur.com/65bP1Fr.jpg" width="70%">
+
+<img src="https://imgur.com/DYoOfz2.jpg" width="70%"> 
+
+<img src="https://imgur.com/CYEUbIx.jpg" width="70%">
 
 
