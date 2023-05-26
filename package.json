@@ -1,0 +1,12 @@
+{
+  "name": "vilnius-coffee-guide",
+  "version": "1.0.0",
+  "description": "## Description This is a web app for discovering coffee shops in Vilnius. You can also leave star reviews on each coffee shop. The app allows you to sort coffee shops by name and rating.",
+  "main": "./server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd ./server && node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
