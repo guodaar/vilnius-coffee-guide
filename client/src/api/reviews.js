@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REVIEW_API_URL = "http://localhost:8000/reviews";
+const REVIEW_API_URL = "https://vilnius-coffee-guide.onrender.com/reviews";
 
 export const fetchReviews = async () => {
   const response = await axios.get(REVIEW_API_URL);
