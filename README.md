@@ -2,6 +2,9 @@
 # Vilnius Coffee Guide ☕☕☕
 ### _Find and rate your favorite coffee shops in Vilnius_
 
+<h2><a href="https://vilnius-coffee-guide.onrender.com/">LIVE DEMO</a></h2>
+
+
 ## Description
 This is a web app for discovering coffee shops in Vilnius. You can also leave star reviews on each coffee shop. The app allows you to sort coffee shops by name and rating. 
 
